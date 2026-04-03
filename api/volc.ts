@@ -1,3 +1,4 @@
+// api/volc.ts
 export const runtime = "edge";
 
 const VOLC_API_URL = "https://ark.cn-beijing.volces.com/api/v3/chat/completions";
@@ -12,7 +13,11 @@ function withTimeout(ms: number) {
 
 export default async function handler(req: Request) {
   if (req.method !== "POST") {
-    return new Response("Method Not Allowed", { status: 405 });
+    // 只加一个 headers，浏览器就会立刻结束请求，不再转圈！
+    return new Response("Method Not Allowed", { 
+      status: 405,
+      headers: { "Content-Type": "text/plain" } // 👈 只加这一句
+    });
   }
 
   try {
