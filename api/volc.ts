@@ -21,6 +21,7 @@ const defaultMessage = {
 
 export async function POST(req: Request) {
   try {
+    console.log(req.headers, 'headers')
     // 从请求头获取 Authorization
     const clientAuth = req.headers.get("Authorization") || "";
 
