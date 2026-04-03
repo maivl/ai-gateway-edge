@@ -13,28 +13,20 @@ export async function POST(req: Request) {
     console.log('reqqqqq-------', VOLC_API_URL, process.env.VOLC_API_KEY)
     console.log(body)
 
-    const upstream = await fetch('https://ark.cn-beijing.volces.com/api/v3/chat/completions', {
+    const upstream = await fetch(VOLC_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer 83471513-157d-4b06-869b-d3c711c5ac37`
+        Authorization: `Bearer ${process.env.VOLC_API_KEY ?? ""}`,
+        "User-Agent": "Mozilla/5.0"
       },
       body: JSON.stringify({
-        model: "doubao-seed-2-0-lite-260215",
-        messages: [
-            {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            },
-            {
-                "role": "user",
-                "content": "Hello!"
-            }
-        ],
-        temperature: 0.7,
-        stream: true
+        model: body.model || "ep-xxxx",
+        messages: body.messages,
+        temperature: body.temperature ?? 0.7,
+        stream: body.stream ?? false
       })
-    })
+    });
 
     if (!upstream.ok) {
       return new Response(await upstream.text(), { status: 500 });
