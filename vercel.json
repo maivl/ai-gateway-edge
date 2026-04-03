@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "^/v1/chat/completions$",
-      "dest": "/api/volc"
+      "dest": "/src/api/volc"
     }
   ]
 }
