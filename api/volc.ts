@@ -10,6 +10,8 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    console.log('reqqqqq-------', VOLC_API_URL, process.env.VOLC_API_KEY)
+    console.log(body)
 
     const upstream = await fetch(VOLC_API_URL, {
       method: "POST",
@@ -44,6 +46,7 @@ export async function POST(req: Request) {
       headers: { "Content-Type": "application/json" }
     });
   } catch (err: any) {
+    console.log(err)
     return new Response(
       JSON.stringify({
         error: "edge_error",
