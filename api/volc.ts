@@ -1,6 +1,5 @@
-export const config = {
-  runtime: "edge",
-};
+// /src/api/volc.ts
+export const runtime = "edge";
 
 const VOLC_ENDPOINT =
   "https://ark.cn-beijing.volces.com/api/v3/chat/completions";
