@@ -21,19 +21,10 @@ export async function POST(req: Request) {
         "User-Agent": "Mozilla/5.0"
       },
       body: JSON.stringify({
-        model: "doubao-seed-2-0-lite-260215",
-        messages: [
-            {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            },
-            {
-                "role": "user",
-                "content": "Hello!"
-            }
-        ],
-        temperature: 0.7,
-        stream: true
+        model: body.model || "ep-xxxx",
+        messages: body.messages,
+        temperature: body.temperature ?? 0.7,
+        stream: body.stream ?? false
       })
     });
 
