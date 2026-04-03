@@ -21,9 +21,9 @@ const defaultMessage = {
 
 export async function POST(req: Request) {
   try {
-    console.log(req.headers, 'headers')
     // 从请求头获取 Authorization
     const clientAuth = req.headers.get("Authorization") || "";
+    console.log(req.headers, 'headers', clientAuth)
 
     const body = await req.json();
     const messages = (body.messages ?? []).filter(item => item.role !== "system");
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       headers: {
         "Content-Type": "application/json",
         // 直接使用客户端传递的 Authorization
-        Authorization: `Bearer ${clientAuth}`,
+        Authorization: clientAuth,
         "User-Agent": "Mozilla/5.0"
       },
       body: JSON.stringify({
